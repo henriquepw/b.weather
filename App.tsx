@@ -3,9 +3,9 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Box } from 'native-base';
 
-import AppProviders from '@/components/templates/AppProviders';
+import AppProviders from './src/components/templates/AppProviders';
 
-export default function App() {
+function App() {
   return (
     <AppProviders>
       <StatusBar style="auto" />
@@ -15,3 +15,5 @@ export default function App() {
     </AppProviders>
   );
 }
+
+export default App;
