@@ -1,11 +1,17 @@
+import React from 'react';
+
 import { StatusBar } from 'expo-status-bar';
-import { Box, NativeBaseProvider } from 'native-base';
+import { Box } from 'native-base';
+
+import AppProviders from '@/components/templates/AppProviders';
 
 export default function App() {
   return (
-    <NativeBaseProvider>
+    <AppProviders>
       <StatusBar style="auto" />
-      <Box flex="1" alignItems="center" justifyContent="center">Hello World</Box>
-    </NativeBaseProvider>
+      <Box flex="1" alignItems="center" justifyContent="center" safeArea>
+        Hello World
+      </Box>
+    </AppProviders>
   );
 }
