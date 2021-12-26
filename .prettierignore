@@ -1,0 +1,5 @@
+.expo*
+.husky
+.vscode
+node_modules
+*.svg

@@ -1,0 +1,46 @@
+{
+  "root": true,
+  "env": {
+    "node": true,
+    "jest": true,
+    "es2021": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "extends": ["plugin:@typescript-eslint/recommended", "xo", "plugin:prettier/recommended"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "import-helpers"],
+  "rules": {
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": [
+          "/^(react|styled-components)/",
+          "module",
+          "/^.*/components/atoms/",
+          "/^.*/components/molecules/",
+          "/^.*/components/organisms/",
+          "/^.*/components/templates/",
+          "/^.*/components/screens/",
+          "/^.*/hooks/",
+          "/^.*/services/",
+          "/^.*/interfaces/",
+          "/^.*/enums/",
+          "/^.*/routes/",
+          "/^.*/styles/",
+          "/^.*/utils/",
+          ["parent", "sibling", "index"],
+          "/^.*assets/",
+          "/^.*styles/"
+        ],
+        "alphabetize": { "order": "asc", "ignoreCase": true }
+      }
+    ]
+  }
+}
