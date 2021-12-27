@@ -1,0 +1,29 @@
+name: Expo store Deploy on the staging release
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  publish-on-staging:
+    name: Install and publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'yarn'
+
+      - uses: expo/expo-github-action@v6
+        with:
+          expo-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+          expo-cache: true
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Publish
+        run: expo publish --release-channel staging --non-interactive
