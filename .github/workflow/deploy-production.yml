@@ -27,3 +27,14 @@ jobs:
 
       - name: Publish
         run: expo publish --non-interactive
+
+      - name: Add Comment To PR
+        uses: mshick/add-pr-comment@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXPO_PROJECT: "@henry-ns/b-weather"
+        with:
+          message: |
+            ## Application
+            ![Expo QR](https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=exp://exp.host/${{ env.EXPO_PROJECT }}?release-channel=default
+            Published to https://exp.host/${{ env.EXPO_PROJECT }}?release-channel=default
