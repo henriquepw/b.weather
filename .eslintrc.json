@@ -16,6 +16,8 @@
   },
   "plugins": ["react", "@typescript-eslint", "import-helpers"],
   "rules": {
+    "camelcase": "off",
+
     "import-helpers/order-imports": [
       "warn",
       {
