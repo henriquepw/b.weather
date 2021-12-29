@@ -6,7 +6,7 @@
     "es2021": true
   },
   "parser": "@typescript-eslint/parser",
-  "extends": ["plugin:@typescript-eslint/recommended", "xo", "plugin:prettier/recommended"],
+  "extends": ["xo", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true

@@ -10,7 +10,7 @@ import { StatusBar } from 'expo-status-bar';
 
 import AppProviders from './src/components/templates/AppProviders';
 
-import RequestLocationPermission from '@/components/screens/RequestLocationPermission';
+import Routers from '@/routes';
 
 function App() {
   const [isFontsLoaded] = useFonts({
@@ -25,7 +25,7 @@ function App() {
   return (
     <AppProviders>
       <StatusBar style="light" />
-      <RequestLocationPermission />
+      <Routers />
     </AppProviders>
   );
 }
