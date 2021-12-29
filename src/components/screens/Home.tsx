@@ -5,7 +5,7 @@ import ScreenContainer from '../templates/ScreenContainer';
 
 const Home: React.FC = () => {
   return (
-    <ScreenContainer justifyContent="center">
+    <ScreenContainer>
       <Button>Teste</Button>
     </ScreenContainer>
   );
