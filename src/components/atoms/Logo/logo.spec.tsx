@@ -2,20 +2,17 @@ import React from 'react';
 
 import { render } from '@testing-library/react-native';
 
-import AppProviders from '@/components/templates/AppProviders';
+import { ComponentWrapper } from '@/utils/test/componentWrapper';
 
-import Logo from '.';
+import Logo from './index';
 
-describe('atoms/Logo', () => {
-  it('check if logo contains the app name', () => {
-    const { getByText } = render(
-      <AppProviders>
-        <Logo>name</Logo>
-      </AppProviders>,
-    );
+describe('Atoms -> Logo', () => {
+  it('should contain the app name', () => {
+    const { getByText } = render(<Logo>name</Logo>, {
+      wrapper: ComponentWrapper,
+    });
 
-    const appName = getByText('B.Weather');
-
-    expect(appName).toBeTruthy();
+    expect(getByText('B.')).toBeTruthy();
+    expect(getByText('Weather')).toBeTruthy();
   });
 });

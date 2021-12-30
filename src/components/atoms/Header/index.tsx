@@ -1,13 +1,21 @@
 import React from 'react';
 
-import { Flex } from 'native-base';
+import { Flex, IFlexProps } from 'native-base';
 
 import Logo from '../Logo';
 
-const Header: React.FC = () => {
+export const HEADER_TEST_ID = 'atoms/header';
+
+const Header: React.FC<IFlexProps> = (props) => {
   return (
-    <Flex height="40" justify="center" align="center">
-      <Logo />
+    <Flex
+      testID={HEADER_TEST_ID}
+      justify="center"
+      align="center"
+      height="40"
+      {...props}
+    >
+      <Logo testID="logo" />
     </Flex>
   );
 };

@@ -2,19 +2,18 @@ import React from 'react';
 
 import { render } from '@testing-library/react-native';
 
-import AppProviders from '../templates/AppProviders';
-import Button from './Button';
+import { ComponentWrapper } from '@/utils/test/componentWrapper';
 
-describe('atoms/Button', () => {
+import Button from './index';
+
+describe('Atoms -> Button', () => {
   it('check if button display the correctly name', () => {
-    const { getByText } = render(
-      <AppProviders>
-        <Button>name</Button>
-      </AppProviders>,
-    );
+    const { getByText } = render(<Button>name</Button>, {
+      wrapper: ComponentWrapper,
+    });
 
     const buttonLabel = getByText('name');
 
-    expect(buttonLabel.props.children).toBe('name');
+    expect(buttonLabel).toBeTruthy();
   });
 });

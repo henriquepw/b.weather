@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Flex, Text } from 'native-base';
+import { Flex, Text, IFlexProps } from 'native-base';
 
-const Logo: React.FC = () => {
+const Logo: React.FC<IFlexProps> = (props) => {
   return (
-    <Flex direction="row">
+    <Flex direction="row" {...props}>
       <Text color="primary.500" fontWeight="bold" fontSize="4xl">
         B.
       </Text>
