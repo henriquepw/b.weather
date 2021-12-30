@@ -1,28 +1,62 @@
-// Import React from 'react';
+import React from 'react';
 
-// import { NavigationContainer } from '@react-navigation/native';
-// import { render } from '@testing-library/react-native';
+import { act, fireEvent, render, waitFor } from '@testing-library/react-native';
+import * as expoLocation from 'expo-location';
 
-// import AppProviders from '@/components/templates/AppProviders';
+import { HEADER_TEST_ID } from '@/components/atoms/Header';
 
-// import RequestLocationPermission from './index';
+import { ScreenWrapper } from '@/utils/test/screenWrapper';
 
-describe('screens/RequestLocationPermission', () => {
-  it.todo('should contain a header element');
+import RequestLocationPermission from './index';
 
-  it.todo('should contain a info message about requesting permission');
+describe('Screens -> RequestLocationPermission', () => {
+  it('should contain a header element', async () => {
+    const { getByTestId } = render(<RequestLocationPermission />, {
+      wrapper: ScreenWrapper,
+    });
 
-  it.todo('should contain a request permission button');
+    const header = await waitFor(() => getByTestId(HEADER_TEST_ID));
 
-  it.todo('when the button is pressed, go into loading mode');
+    expect(header).toBeTruthy();
+  });
 
-  it.todo('should be able to request permission when the button is pressed');
+  it('should contain a info message about requesting permission', async () => {
+    const { getByTestId } = render(<RequestLocationPermission />, {
+      wrapper: ScreenWrapper,
+    });
 
-  it.todo(
-    'should be able to display a success toast if the location permission is granted',
-  );
+    const textMessage = await waitFor(() => getByTestId('text-message'));
+    const iconAlert = getByTestId('icon-alert');
 
-  it.todo(
-    'should be able to display a warning toast if the location permission is denied',
-  );
+    expect(textMessage).toBeTruthy();
+    expect(iconAlert).toBeTruthy();
+  });
+
+  it('should contain a request permission button', async () => {
+    const { getByTestId } = render(<RequestLocationPermission />, {
+      wrapper: ScreenWrapper,
+    });
+
+    const requestButton = await waitFor(() => getByTestId('button-request'));
+
+    expect(requestButton).toBeTruthy();
+  });
+
+  it('should be able to request permission when the button is pressed', async () => {
+    const requestPermissionMock = jest.fn();
+
+    jest
+      .spyOn(expoLocation, 'useForegroundPermissions')
+      .mockImplementation(() => [null, requestPermissionMock, jest.fn()]);
+
+    const { getByTestId } = render(<RequestLocationPermission />, {
+      wrapper: ScreenWrapper,
+    });
+
+    const requestButton = await waitFor(() => getByTestId('button-request'));
+
+    await act(async () => fireEvent.press(requestButton));
+
+    expect(requestPermissionMock).toHaveBeenCalledTimes(1);
+  });
 });
