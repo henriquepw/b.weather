@@ -1,12 +1,22 @@
 import React from 'react';
 
-import { Flex, IFlexProps } from 'native-base';
+import { Flex, IFlexProps, Skeleton } from 'native-base';
 
-const Card: React.FC<IFlexProps> = ({ children, ...rest }) => {
+export type CardProps = IFlexProps & {
+  isLoading?: boolean;
+};
+
+const Card: React.FC<CardProps> = ({
+  children,
+  isLoading = false,
+  ...rest
+}) => {
   return (
-    <Flex direction="row" borderRadius="md" bg="trueGray.800" p="6" {...rest}>
-      {children}
-    </Flex>
+    <Skeleton borderRadius="md" isLoaded={!isLoading}>
+      <Flex direction="row" borderRadius="md" bg="trueGray.800" p="6" {...rest}>
+        {children}
+      </Flex>
+    </Skeleton>
   );
 };
 
