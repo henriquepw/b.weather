@@ -66,7 +66,7 @@ const RequestLocationPermission: React.FC = () => {
   }
 
   useEffect(() => {
-    if (status?.granted && !toast.isActive(GRANTED_TOAST_ID)) {
+    if (status?.granted) {
       navigation.navigate(RouterNames.WEATHER_DETAILS);
     }
   }, [status]);
