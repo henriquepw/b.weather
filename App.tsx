@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
   useFonts,
+  Lato_300Light,
   Lato_400Regular,
   Lato_700Bold,
 } from '@expo-google-fonts/lato';
@@ -14,6 +15,7 @@ import Routers from '@/routes';
 
 function App() {
   const [isFontsLoaded] = useFonts({
+    Lato_300Light,
     Lato_400Regular,
     Lato_700Bold,
   });
