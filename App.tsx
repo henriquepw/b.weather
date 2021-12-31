@@ -1,16 +1,31 @@
 import React from 'react';
 
+import {
+  useFonts,
+  Lato_400Regular,
+  Lato_700Bold,
+} from '@expo-google-fonts/lato';
+import AppLoading from 'expo-app-loading';
 import { StatusBar } from 'expo-status-bar';
 
 import AppProviders from './src/components/templates/AppProviders';
 
-import Home from './src/components/screens/Home';
+import Routers from '@/routes';
 
 function App() {
+  const [isFontsLoaded] = useFonts({
+    Lato_400Regular,
+    Lato_700Bold,
+  });
+
+  if (!isFontsLoaded) {
+    return <AppLoading />;
+  }
+
   return (
     <AppProviders>
       <StatusBar style="light" />
-      <Home />
+      <Routers />
     </AppProviders>
   );
 }

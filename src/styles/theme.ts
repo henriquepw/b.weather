@@ -1,6 +1,36 @@
 import { extendTheme } from 'native-base';
 
 export default extendTheme({
+  fontConfig: {
+    Lato: {
+      100: {
+        normal: 'Lato_400Regular',
+      },
+      200: {
+        normal: 'Lato_400Regular',
+      },
+      300: {
+        normal: 'Lato_400Regular',
+      },
+      400: {
+        normal: 'Lato_400Regular',
+      },
+      500: {
+        normal: 'Lato_700Bold',
+      },
+      600: {
+        normal: 'Lato_700Bold',
+      },
+      700: {
+        normal: 'Lato_700Bold',
+      },
+    },
+  },
+  fonts: {
+    heading: 'Lato',
+    body: 'Lato',
+    mono: 'Lato',
+  },
   colors: {
     gray: {
       50: '#FAFAFA',
