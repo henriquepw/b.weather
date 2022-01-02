@@ -29,6 +29,8 @@ const WeatherDetails: React.FC = () => {
           `${city} - ${region}`,
         ]);
       } catch {
+        setLocationLines(['Localização não encontrada']);
+
         if (!toast.isActive('error-toast')) {
           toast.show({
             id: 'error-toast',
@@ -49,8 +51,9 @@ const WeatherDetails: React.FC = () => {
   return (
     <ScreenContainer>
       <InfoCardSection
-        title="Sua localização"
+        testID="section-location"
         icon="map-pin"
+        title="Sua localização"
         lines={locationLines}
         isLoading={isLocationLoading}
       />

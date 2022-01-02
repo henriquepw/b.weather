@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ITextProps, Text } from 'native-base';
 
-const SectionTittle: React.FC<ITextProps> = ({ children, ...rest }) => {
+const SectionTitle: React.FC<ITextProps> = ({ children, ...rest }) => {
   return (
     <Text color="trueGray.50" fontWeight="bold" fontSize="lg" {...rest}>
       {children}
@@ -10,4 +10,4 @@ const SectionTittle: React.FC<ITextProps> = ({ children, ...rest }) => {
   );
 };
 
-export default SectionTittle;
+export default SectionTitle;

@@ -12,8 +12,15 @@ const Card: React.FC<CardProps> = ({
   ...rest
 }) => {
   return (
-    <Skeleton borderRadius="md" isLoaded={!isLoading}>
-      <Flex direction="row" borderRadius="md" bg="trueGray.800" p="6" {...rest}>
+    <Skeleton testID="skeleton" borderRadius="md" isLoaded={!isLoading}>
+      <Flex
+        testID="flex-container"
+        direction="row"
+        borderRadius="md"
+        bg="trueGray.800"
+        p="6"
+        {...rest}
+      >
         {children}
       </Flex>
     </Skeleton>

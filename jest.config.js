@@ -8,6 +8,7 @@ module.exports = {
   collectCoverageFrom: [
     'src/**/*.tsx',
     '!src/**/*.spec.tsx',
+    '!src/routes/**/*.tsx',
   ],
   coverageReporters: ['lcov'],
 };

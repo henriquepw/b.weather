@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ITextProps, Text } from 'native-base';
 
-const SectionSubTittle: React.FC<ITextProps> = ({ children, ...rest }) => {
+const SectionSubtitle: React.FC<ITextProps> = ({ children, ...rest }) => {
   return (
     <Text
       color="trueGray.50"
@@ -16,4 +16,4 @@ const SectionSubTittle: React.FC<ITextProps> = ({ children, ...rest }) => {
   );
 };
 
-export default SectionSubTittle;
+export default SectionSubtitle;
