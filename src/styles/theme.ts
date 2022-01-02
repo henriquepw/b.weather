@@ -4,19 +4,19 @@ export default extendTheme({
   fontConfig: {
     Lato: {
       100: {
-        normal: 'Lato_400Regular',
+        normal: 'Lato_300Light',
       },
       200: {
-        normal: 'Lato_400Regular',
+        normal: 'Lato_300Light',
       },
       300: {
-        normal: 'Lato_400Regular',
+        normal: 'Lato_300Light',
       },
       400: {
         normal: 'Lato_400Regular',
       },
       500: {
-        normal: 'Lato_700Bold',
+        normal: 'Lato_400Regular',
       },
       600: {
         normal: 'Lato_700Bold',
@@ -47,5 +47,9 @@ export default extendTheme({
   },
   config: {
     initialColorMode: 'dark',
+  },
+  radii: {
+    sm: 8,
+    md: 16,
   },
 });

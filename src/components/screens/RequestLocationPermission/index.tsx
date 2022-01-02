@@ -23,9 +23,6 @@ const RequestLocationPermission: React.FC = () => {
   const [status, requestPermission] = useForegroundPermissions();
 
   function displayStatusToast(permissionStatus?: PermissionStatus) {
-    console.log(toast.isActive(GRANTED_TOAST_ID));
-    console.log(toast.isActive(GRANTED_TOAST_ID));
-
     if (
       permissionStatus === PermissionStatus.DENIED &&
       !toast.isActive(DENIED_TOAST_ID)
@@ -44,8 +41,6 @@ const RequestLocationPermission: React.FC = () => {
       permissionStatus === PermissionStatus.GRANTED &&
       !toast.isActive(GRANTED_TOAST_ID)
     ) {
-      console.log('entrou aqui -----------');
-
       toast.show({
         id: GRANTED_TOAST_ID,
         title: 'Permissão concedida!',
