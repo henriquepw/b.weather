@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "b-weather",
-    "slug": "b-weather",
+    "slug": "b_weather",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

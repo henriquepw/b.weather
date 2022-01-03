@@ -14,6 +14,9 @@
     "test:c": "DISABLE_MOCKED_WARNING=true jest --coverage",
     "prepare": "husky install"
   },
+  "resolutions": {
+    "react-devtools-core": "^4.22.0"
+  },
   "dependencies": {
     "@expo-google-fonts/lato": "^0.2.0",
     "@react-navigation/native": "^6.0.6",
@@ -44,6 +47,7 @@
     "@types/react-native": "~0.64.12",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
+    "dotenv": "^10.0.0",
     "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-xo": "^0.39.0",

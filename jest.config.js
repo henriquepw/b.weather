@@ -9,6 +9,7 @@ module.exports = {
     'src/**/*.tsx',
     '!src/**/*.spec.tsx',
     '!src/routes/**/*.tsx',
+    '!src/utils/test/**/*',
   ],
   coverageReporters: ['lcov'],
 };
