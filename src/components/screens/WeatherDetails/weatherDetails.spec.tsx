@@ -8,6 +8,8 @@ import {
   LocationObject,
 } from 'expo-location';
 
+import * as UseWeather from '@/hooks/useWeather';
+
 import { ScreenWrapper } from '@/utils/test/screenWrapper';
 import { mocked } from 'ts-jest/utils';
 
@@ -51,13 +53,8 @@ describe('Screen -> WeatherDetails', () => {
       },
     } as LocationObject;
 
-    getCurrentPositionAsyncMocked.mockReturnValueOnce(
-      Promise.resolve(locationObject),
-    );
-
-    reverseGeocodeAsyncMocked.mockReturnValueOnce(
-      Promise.resolve([locationAddress]),
-    );
+    getCurrentPositionAsyncMocked.mockResolvedValueOnce(locationObject);
+    reverseGeocodeAsyncMocked.mockResolvedValueOnce([locationAddress]);
 
     const { getByText } = render(<WeatherDetails />, {
       wrapper: ScreenWrapper,
@@ -74,7 +71,7 @@ describe('Screen -> WeatherDetails', () => {
     expect(locationLine2).toBeTruthy();
   });
 
-  it('should be able to display the address by the current location', async () => {
+  it('should be able to display a warning message if has an error with getting the location', async () => {
     const getCurrentPositionAsyncMocked = mocked(getCurrentPositionAsync);
     getCurrentPositionAsyncMocked.mockImplementation(() => {
       throw new Error();
@@ -90,5 +87,54 @@ describe('Screen -> WeatherDetails', () => {
 
     expect(getCurrentPositionAsyncMocked).toThrowError();
     expect(locationErrorLine).toBeTruthy();
+  });
+
+  it('should be able to display the current weather correctly', async () => {
+    const locationObject = {
+      coords: {
+        latitude: 0,
+        longitude: 0,
+      },
+    } as LocationObject;
+
+    const getCurrentPositionAsyncMocked = mocked(getCurrentPositionAsync);
+    getCurrentPositionAsyncMocked.mockResolvedValueOnce(locationObject);
+
+    const weatherData = {
+      weather: [
+        {
+          id: 1,
+          icon: '01d',
+          description: 'any_description',
+        },
+      ],
+      main: {
+        temp: 1,
+        feels_like: 1,
+        temp_min: 1,
+        temp_max: 1,
+        pressure: 1,
+        humidity: 1,
+      },
+    };
+
+    jest
+      .spyOn(UseWeather, 'useWeather')
+      .mockReturnValue([weatherData, false] as UseWeather.UseWeatherResponse);
+
+    const { getByText } = render(<WeatherDetails />, {
+      wrapper: ScreenWrapper,
+    });
+
+    const weatherTempLine = await waitFor(() =>
+      getByText(`1 ºC, 1%`, { exact: false }),
+    );
+
+    const weatherDescriptionLine = getByText(
+      new RegExp(weatherData.weather[0].description, 'ig'),
+    );
+
+    expect(weatherTempLine).toBeTruthy();
+    expect(weatherDescriptionLine).toBeTruthy();
   });
 });
