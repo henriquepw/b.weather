@@ -26,7 +26,7 @@ const InfoCardSection: React.FC<InfoCardSectionProps> = ({
 
       <Card testID="card-container" align="center" isLoading={isLoading}>
         <Icon as={Feather} name={icon} color="primary.500" size="xl" mr="4" />
-        <Flex testID="flex-lines-container">
+        <Flex flex="1" testID="flex-lines-container">
           {lines.map((line) => (
             <Text key={line} color="trueGray.50" fontSize="md">
               {line}
