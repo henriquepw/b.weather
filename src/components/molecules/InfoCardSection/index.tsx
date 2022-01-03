@@ -22,7 +22,7 @@ const InfoCardSection: React.FC<InfoCardSectionProps> = ({
 }) => {
   return (
     <Box {...rest}>
-      <SectionTitle>{title}</SectionTitle>
+      <SectionTitle mb="1">{title}</SectionTitle>
 
       <Card testID="card-container" align="center" isLoading={isLoading}>
         <Icon as={Feather} name={icon} color="primary.500" size="xl" mr="4" />
