@@ -14,8 +14,18 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "import-helpers"],
+  "plugins": [
+    "@typescript-eslint/eslint-plugin",
+    "react-hooks",
+    "prettier",
+    "import-helpers"
+  ],
   "rules": {
+    "prettier/prettier": "error",
+
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+
     "camelcase": "off",
 
     "import-helpers/order-imports": [
@@ -32,7 +42,7 @@
           "/^.*/components/screens/",
           "/^.*/hooks/",
           "/^.*/services/",
-          "/^.*/interfaces/",
+          "/^.*/types/",
           "/^.*/enums/",
           "/^.*/routes/",
           "/^.*/styles/",
