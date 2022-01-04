@@ -64,7 +64,7 @@ const RequestLocationPermission: React.FC = () => {
     if (status?.granted) {
       navigation.navigate(RouterNames.WEATHER_DETAILS);
     }
-  }, [status]);
+  }, [navigation, status]);
 
   return (
     <ScreenContainer testID="container">

@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
+import { parseISO } from 'date-fns';
 import {
   getCurrentPositionAsync,
   LocationObjectCoords,
@@ -7,14 +8,18 @@ import {
 } from 'expo-location';
 import { useToast } from 'native-base';
 
+import ForecastDaySection from '@/components/molecules/ForecastDaySection';
 import InfoCardSection from '@/components/molecules/InfoCardSection';
 
 import ScreenContainer from '@/components/templates/ScreenContainer';
 
+import { useForecast } from '@/hooks/useForecast';
 import { useWeather } from '@/hooks/useWeather';
 
 import { WeatherIcons } from '@/enums/WeatherIcons';
 
+import { capitalizeString } from '@/utils/capitalizeString';
+import { formatTemperature } from '@/utils/formatTemperature';
 import { WEATHER_ICONS_MAP } from '@/utils/weatherIconsMap';
 
 const WeatherDetails: React.FC = () => {
@@ -25,6 +30,7 @@ const WeatherDetails: React.FC = () => {
   const [coords, setCoords] = useState<LocationObjectCoords>();
 
   const [currentWeather, isCurrentWeatherLoading] = useWeather(coords);
+  const [forecast] = useForecast(coords);
 
   const weatherIcon =
     WEATHER_ICONS_MAP[currentWeather?.weather[0].icon || WeatherIcons.MIST_DAY];
@@ -37,8 +43,8 @@ const WeatherDetails: React.FC = () => {
     const { temp, humidity } = currentWeather.main;
     const { description } = currentWeather.weather[0];
 
-    lines.push(`${String(temp).replace('.', ',')} ºC, ${humidity}%`);
-    lines.push(`${description.charAt(0).toUpperCase()}${description.slice(1)}`);
+    lines.push(`${formatTemperature(temp)}, ${humidity}%`);
+    lines.push(capitalizeString(description));
 
     return lines;
   }, [currentWeather]);
@@ -81,8 +87,9 @@ const WeatherDetails: React.FC = () => {
   }, []);
 
   return (
-    <ScreenContainer>
+    <ScreenContainer px="0">
       <InfoCardSection
+        mx="4"
         testID="section-location"
         icon="map-pin"
         title="Sua localização"
@@ -91,13 +98,23 @@ const WeatherDetails: React.FC = () => {
       />
 
       <InfoCardSection
-        mt="8"
+        mt="6"
+        mx="4"
         testID="section-current-weather"
         icon={weatherIcon}
         title="Clima"
         lines={currentWeatherLines}
         isLoading={isCurrentWeatherLoading}
       />
+
+      {forecast !== undefined &&
+        Object.keys(forecast).map((day) => (
+          <ForecastDaySection
+            key={day}
+            day={parseISO(day)}
+            data={forecast[day]}
+          />
+        ))}
     </ScreenContainer>
   );
 };
