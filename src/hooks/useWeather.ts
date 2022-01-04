@@ -4,22 +4,12 @@ import Constants from 'expo-constants';
 
 import { openWeatherMapApi } from '@/services/openWeatherMapApi';
 
-import { WeatherIcons } from '@/enums/WeatherIcons';
+import { MainData } from '@/types/openWeather/mainData';
+import { WeatherData } from '@/types/openWeather/weatherData';
 
 export type GetWeatherResponse = {
-  main: {
-    temp: number;
-    feels_like: number;
-    temp_min: number;
-    temp_max: number;
-    pressure: number;
-    humidity: number;
-  };
-  weather: Array<{
-    id: number;
-    description: string;
-    icon: WeatherIcons;
-  }>;
+  main: MainData;
+  weather: WeatherData[];
 };
 
 export type UseWeatherParams = {
@@ -62,7 +52,7 @@ export function useWeather(coords?: UseWeatherParams): UseWeatherResponse {
     }
 
     fetchWeather();
-  }, []);
+  }, [coords]);
 
   return [data, isLoading];
 }
