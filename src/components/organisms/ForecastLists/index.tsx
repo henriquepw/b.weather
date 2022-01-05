@@ -1,7 +1,7 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { Fragment } from 'react';
 
 import { parseISO } from 'date-fns';
+import { Box, ScrollView, Skeleton } from 'native-base';
 
 import ForecastDaySection from '@/components/molecules/ForecastDaySection';
 
@@ -13,7 +13,23 @@ export type ForecastListsProps = {
 };
 
 const ForecastLists: React.FC<ForecastListsProps> = ({ data, isLoading }) => {
-  if (isLoading) return null;
+  if (isLoading) {
+    return (
+      <Box mx="4">
+        {[1, 2].map((item) => (
+          <Fragment key={item}>
+            <Skeleton h="24px" w="100px" mt="4" borderRadius="sm" />
+
+            <ScrollView horizontal mt="2">
+              <Skeleton h="126px" w="96px" borderRadius="md" />
+              <Skeleton h="126px" w="96px" borderRadius="md" ml="4" />
+              <Skeleton h="126px" w="96px" borderRadius="md" ml="4" />
+            </ScrollView>
+          </Fragment>
+        ))}
+      </Box>
+    );
+  }
 
   if (data === undefined) return null;
 

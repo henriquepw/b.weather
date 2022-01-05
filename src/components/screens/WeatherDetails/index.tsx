@@ -132,10 +132,13 @@ const WeatherDetails: React.FC = () => {
           icon={weatherIcon}
           title="Clima"
           lines={currentWeatherLines}
-          isLoading={isCurrentWeatherLoading}
+          isLoading={isLocationLoading || isCurrentWeatherLoading}
         />
 
-        <ForecastLists data={forecast} isLoading={isForecastLoading} />
+        <ForecastLists
+          data={forecast}
+          isLoading={isLocationLoading || isForecastLoading}
+        />
       </ScreenContainer>
 
       <FloatButton icon="refresh-cw" onPress={handleRefreshData} />
