@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render, waitFor } from '@testing-library/react-native';
+import { fireEvent, render, waitFor } from '@testing-library/react-native';
 import {
   getCurrentPositionAsync,
   LocationGeocodedAddress,
@@ -127,11 +127,107 @@ describe('Screen -> WeatherDetails', () => {
     });
 
     const weatherTempLine = await waitFor(() =>
-      getByText(`1 ºC, 1%`, { exact: false }),
+      getByText(`1,0 ºC, 1%`, { exact: false }),
     );
 
     const weatherDescriptionLine = getByText(
       new RegExp(weatherData.weather[0].description, 'ig'),
+    );
+
+    expect(weatherTempLine).toBeTruthy();
+    expect(weatherDescriptionLine).toBeTruthy();
+  });
+
+  it('should be able to refresh the data', async () => {
+    const locationObject = {
+      coords: {
+        latitude: 0,
+        longitude: 0,
+      },
+    } as LocationObject;
+
+    const locationAddress: LocationGeocodedAddress = {
+      name: null,
+      street: 'any_street',
+      streetNumber: 'any_number',
+      city: 'any_city',
+      country: 'any_country',
+      district: 'any_district',
+      isoCountryCode: 'any_code',
+      postalCode: 'any_postalCode',
+      region: 'any_region',
+      subregion: 'any_subregion',
+      timezone: 'any_timezone',
+    };
+
+    const getCurrentPositionAsyncMocked = mocked(getCurrentPositionAsync);
+    const reverseGeocodeAsyncMocked = mocked(reverseGeocodeAsync);
+
+    getCurrentPositionAsyncMocked.mockResolvedValue(locationObject);
+    reverseGeocodeAsyncMocked.mockResolvedValue([locationAddress]);
+
+    const weatherData = {
+      weather: [
+        {
+          id: 1,
+          icon: '01d',
+          description: 'any_description',
+        },
+      ],
+      main: {
+        temp: 1,
+        feels_like: 1,
+        temp_min: 1,
+        temp_max: 1,
+        pressure: 1,
+        humidity: 1,
+      },
+    };
+
+    jest
+      .spyOn(UseWeather, 'useWeather')
+      .mockReturnValueOnce([
+        weatherData,
+        false,
+      ] as UseWeather.UseWeatherResponse);
+
+    const { getByText, getByTestId } = render(<WeatherDetails />, {
+      wrapper: ScreenWrapper,
+    });
+
+    const refreshedWeatherData = {
+      weather: [
+        {
+          id: 1,
+          icon: '01d',
+          description: 'update_any_description',
+        },
+      ],
+      main: {
+        temp: 2,
+        feels_like: 2,
+        temp_min: 2,
+        temp_max: 2,
+        pressure: 2,
+        humidity: 2,
+      },
+    };
+
+    jest
+      .spyOn(UseWeather, 'useWeather')
+      .mockReturnValue([
+        refreshedWeatherData,
+        false,
+      ] as UseWeather.UseWeatherResponse);
+
+    fireEvent.press(getByTestId('float-btn-refresh'));
+
+    const weatherTempLine = await waitFor(() =>
+      getByText(`2,0 ºC, 2%`, { exact: false }),
+    );
+
+    const weatherDescriptionLine = getByText(
+      new RegExp(refreshedWeatherData.weather[0].description, 'ig'),
     );
 
     expect(weatherTempLine).toBeTruthy();
