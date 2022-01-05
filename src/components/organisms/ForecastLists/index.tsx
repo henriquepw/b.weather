@@ -15,7 +15,7 @@ export type ForecastListsProps = {
 const ForecastLists: React.FC<ForecastListsProps> = ({ data, isLoading }) => {
   if (isLoading) {
     return (
-      <Box mx="4">
+      <Box mx="4" testID="skeleton-box">
         {[1, 2].map((item) => (
           <Fragment key={item}>
             <Skeleton h="24px" w="100px" mt="4" borderRadius="sm" />
@@ -38,7 +38,12 @@ const ForecastLists: React.FC<ForecastListsProps> = ({ data, isLoading }) => {
       {Object.keys(data)
         .splice(0, 3)
         .map((day) => (
-          <ForecastDaySection key={day} day={parseISO(day)} data={data[day]} />
+          <ForecastDaySection
+            testID={`forecast-day-section-${day}`}
+            key={day}
+            day={parseISO(day)}
+            data={data[day]}
+          />
         ))}
     </>
   );
