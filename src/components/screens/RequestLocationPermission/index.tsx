@@ -67,7 +67,7 @@ const RequestLocationPermission: React.FC = () => {
   }, [navigation, status]);
 
   return (
-    <ScreenContainer testID="container">
+    <ScreenContainer testID="container" contentContainerStyle={{ flexGrow: 1 }}>
       <Flex align="center" my="auto">
         <Icon
           testID="icon-alert"
