@@ -141,7 +141,11 @@ const WeatherDetails: React.FC = () => {
         />
       </ScreenContainer>
 
-      <FloatButton icon="refresh-cw" onPress={handleRefreshData} />
+      <FloatButton
+        testID="float-btn-refresh"
+        icon="refresh-cw"
+        onPress={handleRefreshData}
+      />
     </>
   );
 };
