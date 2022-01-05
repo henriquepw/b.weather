@@ -25,6 +25,12 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      - name: Create env file
+        run: |
+          touch .env
+          echo OPEN_WEATHER_MAP_API_KEY=${{ secrets.OPEN_WEATHER_MAP_API_KEY }} >> .env
+          cat .env
+
       - name: Publish
         run: expo publish --non-interactive
 
