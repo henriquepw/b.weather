@@ -37,6 +37,7 @@ const ForecastDaySection: React.FC<ForecastDaySectionProps> = ({
       </Heading>
 
       <FlatList
+        testID="list-forecast-card"
         horizontal
         data={data}
         contentContainerStyle={{ paddingHorizontal: theme.sizes[4] }}
