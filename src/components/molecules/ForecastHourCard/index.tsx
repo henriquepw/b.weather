@@ -24,7 +24,7 @@ const ForecastHourCard: React.FC<ForecastHourCardProps> = ({
   const hour = format(parseISO(data.dt_txt), 'HH:mm');
   const temperature = formatTemperature(data.main.temp);
   const iconName =
-    WEATHER_ICONS_MAP[data.weather[0].icon || WeatherIcons.MIST_DAY];
+    WEATHER_ICONS_MAP[data.weather[0]?.icon || WeatherIcons.MIST_DAY];
 
   return (
     <Card w="96px" direction="column" align="center" p="4" {...rest}>
