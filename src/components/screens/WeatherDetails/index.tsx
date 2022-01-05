@@ -1,15 +1,18 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { RefreshControl } from 'react-native';
 
-import { parseISO } from 'date-fns';
 import {
   getCurrentPositionAsync,
   LocationObjectCoords,
   reverseGeocodeAsync,
 } from 'expo-location';
-import { useToast } from 'native-base';
+import { useTheme, useToast } from 'native-base';
 
-import ForecastDaySection from '@/components/molecules/ForecastDaySection';
+import FloatButton from '@/components/atoms/FloatButton';
+
 import InfoCardSection from '@/components/molecules/InfoCardSection';
+
+import ForecastLists from '@/components/organisms/ForecastLists';
 
 import ScreenContainer from '@/components/templates/ScreenContainer';
 
@@ -24,13 +27,14 @@ import { WEATHER_ICONS_MAP } from '@/utils/weatherIconsMap';
 
 const WeatherDetails: React.FC = () => {
   const toast = useToast();
+  const theme = useTheme();
 
   const [isLocationLoading, setIsLocationLoading] = useState(false);
   const [locationLines, setLocationLines] = useState<string[]>([]);
   const [coords, setCoords] = useState<LocationObjectCoords>();
 
   const [currentWeather, isCurrentWeatherLoading] = useWeather(coords);
-  const [forecast] = useForecast(coords);
+  const [forecast, isForecastLoading] = useForecast(coords);
 
   const weatherIcon =
     WEATHER_ICONS_MAP[currentWeather?.weather[0].icon || WeatherIcons.MIST_DAY];
@@ -49,73 +53,93 @@ const WeatherDetails: React.FC = () => {
     return lines;
   }, [currentWeather]);
 
-  useEffect(() => {
-    async function loadLocation() {
-      setIsLocationLoading(true);
+  const loadLocation = useCallback(async (successFn?: () => void) => {
+    toast.closeAll();
 
-      try {
-        const currentPosition = await getCurrentPositionAsync();
-        const { latitude, longitude } = currentPosition.coords;
+    setIsLocationLoading(true);
 
-        setCoords(currentPosition.coords);
+    try {
+      const currentPosition = await getCurrentPositionAsync();
+      const { latitude, longitude } = currentPosition.coords;
 
-        const [{ street, streetNumber, city, region }] =
-          await reverseGeocodeAsync({ latitude, longitude });
+      setCoords(currentPosition.coords);
 
-        setLocationLines([
-          `${street}, N ${streetNumber}`,
-          `${city} - ${region}`,
-        ]);
-      } catch {
-        setLocationLines(['Localização não encontrada']);
+      const [{ street, streetNumber, city, region }] =
+        await reverseGeocodeAsync({ latitude, longitude });
 
-        if (!toast.isActive('error-toast')) {
-          toast.show({
-            id: 'error-toast',
-            title: 'Houve um erro',
-            description: 'A requisição de permissão foi negada',
-            status: 'error',
-            placement: 'bottom',
-          });
-        }
-      } finally {
-        setIsLocationLoading(false);
+      setLocationLines([`${street}, N ${streetNumber}`, `${city} - ${region}`]);
+
+      if (successFn) successFn();
+    } catch {
+      setLocationLines(['Localização não encontrada']);
+
+      if (!toast.isActive('error-toast')) {
+        toast.show({
+          id: 'error-toast',
+          title: 'Houve um erro',
+          description: 'A requisição de permissão foi negada',
+          status: 'error',
+          placement: 'bottom',
+        });
       }
+    } finally {
+      setIsLocationLoading(false);
     }
+  }, []);
 
+  async function handleRefreshData() {
+    loadLocation(() => {
+      if (!toast.isActive('success-toast')) {
+        toast.show({
+          id: 'success-toast',
+          title: 'Dados atualizados com sucesso!',
+          status: 'success',
+          placement: 'bottom',
+        });
+      }
+    });
+  }
+
+  useEffect(() => {
     loadLocation();
   }, []);
 
   return (
-    <ScreenContainer px="0">
-      <InfoCardSection
-        mx="4"
-        testID="section-location"
-        icon="map-pin"
-        title="Sua localização"
-        lines={locationLines}
-        isLoading={isLocationLoading}
-      />
-
-      <InfoCardSection
-        mt="6"
-        mx="4"
-        testID="section-current-weather"
-        icon={weatherIcon}
-        title="Clima"
-        lines={currentWeatherLines}
-        isLoading={isCurrentWeatherLoading}
-      />
-
-      {forecast !== undefined &&
-        Object.keys(forecast).map((day) => (
-          <ForecastDaySection
-            key={day}
-            day={parseISO(day)}
-            data={forecast[day]}
+    <>
+      <ScreenContainer
+        px="0"
+        contentContainerStyle={{ paddingBottom: theme.sizes[24] }}
+        refreshControl={
+          <RefreshControl
+            refreshing={isLocationLoading}
+            onRefresh={handleRefreshData}
           />
-        ))}
-    </ScreenContainer>
+        }
+      >
+        <InfoCardSection
+          mx="4"
+          testID="section-location"
+          icon="map-pin"
+          title="Sua localização"
+          lines={locationLines}
+          isLoading={isLocationLoading}
+        />
+
+        <InfoCardSection
+          mt="6"
+          mx="4"
+          testID="section-current-weather"
+          icon={weatherIcon}
+          title="Clima"
+          lines={currentWeatherLines}
+          isLoading={isCurrentWeatherLoading}
+        />
+
+        <ForecastLists data={forecast} isLoading={isForecastLoading} />
+      </ScreenContainer>
+
+      <FloatButton icon="refresh-cw" onPress={handleRefreshData} />
+    </>
   );
 };
 

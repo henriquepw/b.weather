@@ -127,7 +127,7 @@ describe('Screen -> WeatherDetails', () => {
     });
 
     const weatherTempLine = await waitFor(() =>
-      getByText(`1 ºC, 1%`, { exact: false }),
+      getByText(`1,0 ºC, 1%`, { exact: false }),
     );
 
     const weatherDescriptionLine = getByText(
