@@ -1,12 +1,15 @@
 import React from 'react';
 
-import { Box, IBoxProps } from 'native-base';
+import { ScrollView, IScrollViewProps } from 'native-base';
 
-const ScreenContainer: React.FC<IBoxProps> = ({ children, ...rest }) => {
+import Header from '../atoms/Header';
+
+const ScreenContainer: React.FC<IScrollViewProps> = ({ children, ...rest }) => {
   return (
-    <Box flex="1" px="4" bg="gray.900" safeArea {...rest}>
+    <ScrollView flex="1" px="4" bg="gray.900" {...rest}>
+      <Header safeArea />
       {children}
-    </Box>
+    </ScrollView>
   );
 };
 
