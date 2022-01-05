@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { fireEvent, render, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, waitFor } from '@testing-library/react-native';
 import {
   getCurrentPositionAsync,
   LocationGeocodedAddress,
@@ -32,7 +32,7 @@ describe('Screen -> WeatherDetails', () => {
     const getCurrentPositionAsyncMocked = mocked(getCurrentPositionAsync);
     const reverseGeocodeAsyncMocked = mocked(reverseGeocodeAsync);
 
-    const locationAddress: LocationGeocodedAddress = {
+    let locationAddress: LocationGeocodedAddress = {
       name: null,
       street: 'any_street',
       streetNumber: 'any_number',
@@ -53,22 +53,69 @@ describe('Screen -> WeatherDetails', () => {
       },
     } as LocationObject;
 
-    getCurrentPositionAsyncMocked.mockResolvedValueOnce(locationObject);
+    getCurrentPositionAsyncMocked.mockResolvedValue(locationObject);
     reverseGeocodeAsyncMocked.mockResolvedValueOnce([locationAddress]);
 
-    const { getByText } = render(<WeatherDetails />, {
+    const { getByText, getByTestId } = render(<WeatherDetails />, {
       wrapper: ScreenWrapper,
     });
 
-    const locationLine1 = await waitFor(() =>
-      getByText(`${locationAddress.street}, N ${locationAddress.streetNumber}`),
+    let locationLine1 = await waitFor(() =>
+      getByText(
+        `${locationAddress.street}, Nº ${locationAddress.streetNumber}`,
+      ),
     );
 
-    const locationLine2 = () =>
-      getByText(`${locationAddress.city} - ${locationAddress.region}`);
+    const locationLine2 = getByText(
+      `${locationAddress.city} - ${locationAddress.region}`,
+    );
 
     expect(locationLine1).toBeTruthy();
     expect(locationLine2).toBeTruthy();
+
+    locationAddress = {
+      name: null,
+      street: null,
+      streetNumber: '10',
+      city: null,
+      country: 'any_country',
+      district: 'any_district',
+      isoCountryCode: 'any_code',
+      postalCode: 'any_postalCode',
+      region: null,
+      subregion: null,
+      timezone: 'any_timezone',
+    };
+
+    reverseGeocodeAsyncMocked.mockResolvedValueOnce([locationAddress]);
+
+    const btnRefresh = getByTestId('float-btn-refresh');
+
+    await act(async () => fireEvent.press(btnRefresh));
+
+    locationLine1 = getByText('Nº 10');
+    expect(locationLine1).toBeTruthy();
+
+    locationAddress = {
+      name: null,
+      street: 'any_street',
+      streetNumber: null,
+      city: null,
+      country: 'any_country',
+      district: 'any_district',
+      isoCountryCode: 'any_code',
+      postalCode: 'any_postalCode',
+      region: null,
+      subregion: 'any_subregion',
+      timezone: 'any_timezone',
+    };
+
+    reverseGeocodeAsyncMocked.mockResolvedValueOnce([locationAddress]);
+
+    await act(async () => fireEvent.press(btnRefresh));
+
+    locationLine1 = getByText(String(locationAddress.street));
+    expect(locationLine1).toBeTruthy();
   });
 
   it('should be able to display a warning message if has an error with getting the location', async () => {

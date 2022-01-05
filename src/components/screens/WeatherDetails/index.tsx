@@ -64,10 +64,29 @@ const WeatherDetails: React.FC = () => {
 
       setCoords(currentPosition.coords);
 
-      const [{ street, streetNumber, city, region }] =
+      const [{ street, streetNumber, city, region, subregion }] =
         await reverseGeocodeAsync({ latitude, longitude });
 
-      setLocationLines([`${street}, N ${streetNumber}`, `${city} - ${region}`]);
+      const locationLine1: string[] = [];
+      const locationLine2: string[] = [];
+
+      if (street) {
+        locationLine1.push(street);
+      }
+
+      if (streetNumber) {
+        locationLine1.push(`Nº ${streetNumber}`);
+      }
+
+      if (city || subregion) {
+        locationLine2.push(String(city || subregion));
+      }
+
+      if (region) {
+        locationLine2.push(region);
+      }
+
+      setLocationLines([locationLine1.join(', '), locationLine2.join(' - ')]);
 
       if (successFn) successFn();
     } catch {
