@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cleanup, render, waitFor } from '@testing-library/react-native';
+import { render } from '@testing-library/react-native';
 
 import theme from '@/styles/theme';
 
