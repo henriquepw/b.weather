@@ -41,73 +41,76 @@
 
 <!-- summary -->
 <p align="center">
-  <a href="#clipboard-descrição">Descrição</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#rocket-executando-localmente">Executando Localmente</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-o-que-tem-dentro">O que tem dentro?</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-licença">Licença</a>
+  <a href="#clipboard-description">Description</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#iphone-running-at-expo">Running at Expo</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#rocket-running-locally">Running locally</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-whats-inside">What's inside?</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-license">License</a>
 </p>
 
-## :clipboard: Descrição
-B.Weather é um aplicativo informativo do clima atual e de previsões do tempo referente a sua localização. Foi desenvolvido inicialmente como desafio técnico de React Native na [Builders](https://platformbuilders.io).
+## :clipboard: Description
+B.Weather is a current weather and weather forecast app for your location. It was initially developed as a technical challenge for React Native at [Builders](https://platformbuilders.io).
 
-## :iphone: Executando no Expo
-  É possível ver a ultima versão do aplicativo disponível no Expo Store, para executar no seu smartphone, basta baixar o aplicativo Expo na loja de aplicativos e escanear o QRCode abaixo, ou acessando [aqui](https://exp.host/@henry-ns/b-weather?release-channel=default):
+
+## :iphone: Running at Expo
+  You can see the latest version of the app available on the Expo Store, to run on your smartphone, just download the Expo app from the app store and scan the QR Code below, or by accessing [here](https://exp.host/@henry-ns/b-weather?release-channel=default):
 
 <p align="center">
   <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=exp://exp.host/@henry-ns/b-weather?release-channel=default"></img>
 </p>
 
-## :rocket: Executando Localmente
+## :rocket: Running locally
 
-1. Baixar o repositório
+1. Download the repository
 
-  - Usando Git
+  - Using Git
 ```shell
   git clone https://github.com/henry-ns/b.weather.git
 ```
-  - Usando Github CLI
+  - Using Github CLI
 ```shell
   gh repo clone henry-ns/b.weather
 ```
-  > :bulb: ou de outra forma que preferir
+  > :bulb: or in whatever way you prefer
 
-2. Instalação
+2. Installation
 
-Dentro da pasta do repositório, rode o seguinte comando:
+Inside the repository folder, run the following command:
 
   ```shell
     yarn install
   ```
 
-  > :bulb: Pode-se usar qualquer gerenciador de pacotes da sua preferencia, como `npm` ou `pnpm`.
+  > :bulb: You can use any package manager you like, such as `npm` or `pnpm`.
 
-3. Execução
+1. Execution
 
-Para executar no emulador iOS, rode o seguinte comando:
+To run on iOS emulator, run the following command:
+
   ```shell
     yarn ios
   ```
 
-Para executar no emulador Android, rode o seguinte comando:
+To run on Android emulator, run the following command:
   ```shell
     yarn android
   ```
 
-  > :bulb: Para informações mais detalhadas, acesse a documentação do [Expo](https://docs.expo.dev/tutorial/planning/)
+  > :bulb: For more detailed information, access the [Expo](https://docs.expo.dev/tutorial/planning/) documentation.
 
 ## 🧐 O que tem dentro?
 
-### :building_construction: Tecnologias
+### :building_construction: Technologies
 - [Expo](https://docs.expo.dev)
 - [React Native](https://reactnative.dev)
 
-### :lipstick: Ferramentas de Linter
+### :lipstick: Linter Tools
 - [Eslint](https://eslint.org/)
 - [EditorConfig](https://editorconfig.org/)
 - [Lint Staged](https://github.com/okonet/lint-staged)
 - [Prettier](https://prettier.io/)
 
-### :package: Pacotes
+### :package: Packages
 
   - [Axios](https://axios-http.com)
   - [date-fns](https://date-fns.org)
@@ -116,7 +119,7 @@ Para executar no emulador Android, rode o seguinte comando:
   - [NativeBase](https://nativebase.io)
   - [React Navigation](https://reactnavigation.org)
 
-### Uma rápida olhada nos diretórios dentro do `./src`.
+### A quick look at the directories inside the `./src`.
     ./src
      ├── components
      ├── enums
@@ -127,26 +130,26 @@ Para executar no emulador Android, rode o seguinte comando:
      ├── types
      ├── utils
 
-1.  **`components`**: pasta com os componentes do aplicativo seguindo o padrão [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/)
+1.  **`components`**: folder with application components following the [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) pattern.
 
-2.  **`enums`**: pasta com os enums da aplicação
+2. **`enums`**: folder with the application's enums
 
-3.  **`hooks`**: react hooks customizados.
+3. **`hooks`**: custom react hooks.
 
-4.  **`routes`**: rotas do aplicativos.
+4. **`routes`**: application routes.
 
-5.  **`services`**: serviços de terceiros utilizados.
+5. **`services`**: Third party services used.
 
-6.  **`styles`**: estilos globais.
+6. **`styles`**: global styles.
 
-7.  **`types`**: pasta com os tipos da aplicação.
+7. **`types`**: folder with application types.
 
-8.  **`utils`**: funções utilitárias recorrentes.
+8. **`utils`**: recurring utility functions.
 
 ## :memo: Licença
 
-Este projeto está sob a licença do MIT. Veja o arquivo  [LICENSE](LICENSE) para mais detalhes.
+This project is under the MIT license. See the file [LICENSE](LICENSE) for more details.
 
 ---
 
-Feito com 💙 por [Henrique](https://henrique.pw)
+Build with 💙 by [Henrique](https://henrique.pw)
