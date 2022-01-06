@@ -103,7 +103,7 @@ To run on Android emulator, run the following command:
 
   > :bulb: For more detailed information, access the [Expo](https://docs.expo.dev/tutorial/planning/) documentation.
 
-## 🧐 O que tem dentro?
+## 🧐 What's inside?
 
 ### :building_construction: Technologies
 - [Expo](https://docs.expo.dev)
@@ -151,7 +151,7 @@ To run on Android emulator, run the following command:
 
 8. **`utils`**: recurring utility functions.
 
-## :memo: Licença
+## :memo: License
 
 This project is under the MIT license. See the file [LICENSE](LICENSE) for more details.
 
