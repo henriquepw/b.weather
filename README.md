@@ -56,6 +56,9 @@
 ## :clipboard: Description
 B.Weather is a current weather and weather forecast app for your location. It was initially developed as a technical challenge for React Native at [Builders](https://platformbuilders.io).
 
+<p align="center">
+  <img src="./assets/print-screens.png"></img>
+</p>
 
 ## :iphone: Running at Expo
   You can see the latest version of the app available on the Expo Store, to run on your smartphone, just download the Expo app from the app store and scan the QR Code below, or by accessing [here](https://exp.host/@henry-ns/b-weather?release-channel=default):

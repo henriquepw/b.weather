@@ -55,6 +55,10 @@
 ## :clipboard: Descrição
 B.Weather é um aplicativo informativo do clima atual e de previsões do tempo referente a sua localização. Foi desenvolvido inicialmente como desafio técnico de React Native na [Builders](https://platformbuilders.io).
 
+<p align="center">
+  <img src="./assets/print-screens.png"></img>
+</p>
+
 ## :iphone: Executando no Expo
   É possível ver a ultima versão do aplicativo disponível no Expo Store, para executar no seu smartphone, basta baixar o aplicativo Expo na loja de aplicativos e escanear o QRCode abaixo, ou acessando [aqui](https://exp.host/@henry-ns/b-weather?release-channel=default):
 
