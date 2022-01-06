@@ -35,8 +35,13 @@
   <br/>
 
   <!-- langs -->
-  <img alt="en" src="https://img.shields.io/badge/lang-en-red.svg">
-  <img alt="pt" src="https://img.shields.io/badge/lang-pt-green.svg">
+  <a href="./README.md" alt="CodeFactor">
+    <img alt="en" src="https://img.shields.io/badge/lang-en-red.svg">
+  </a>
+
+  <a href="./README.pt.md" alt="CodeFactor">
+    <img alt="pt" src="https://img.shields.io/badge/lang-pt-green.svg">
+  </a>
 </p>
 
 <!-- summary -->
